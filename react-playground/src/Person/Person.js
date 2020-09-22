@@ -2,7 +2,12 @@ import React from 'react';
 
 // Functional React Component //
 
-const person = () => {
-    return <p>I'm a person and I am {Math.floor(Math.random() * 30)}</p>
+const person = (props) => {
+    return (
+        <div>
+            <p>Hi, I'm {props.name} and I am {props.age} years old.</p>
+            <p>{props.children}</p>
+        </div>
+    )
 };
 export default person;
