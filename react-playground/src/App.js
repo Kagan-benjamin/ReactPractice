@@ -7,8 +7,8 @@ import UserInput from './UserInput/UserInput.js';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Ben', age: 30 },
-      { name: 'Layla', age: 32 }
+      { id: 1, name: 'Ben', age: 30 },
+      { id: 2, name: 'Layla', age: 32 }
     ],
     full: false,
     showpersons: false,
@@ -54,6 +54,12 @@ class App extends Component {
     this.setState({ showpersons: !this.state.showpersons})
   }
 
+  deletePersonHandler = (idx) => {
+    const persons = [...this.state.persons];
+    persons.splice(idx, 1);
+    this.setState({persons: persons})
+  }
+
   render() {
     const style = {
       backgroundColor: 'baby blue',
@@ -75,27 +81,25 @@ class App extends Component {
     if(this.state.showpersons){
       persons = (
         <div>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler}
-          changed={this.nameChangedHandler}/>
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler}
-          changed={this.nameChangedHandler}/>
-        <UserInput 
-          style={inputStyle}
-          testHandler={this.testHandler} 
-          username={this.state.usernames[0]} />
-        <UserOutput 
-          style={outputStyle}
-          username={this.state.usernames[0]}/>
-        <UserOutput
-          style={outputStyle} 
-          username={this.state.usernames[0]}/>
-          </div>
+          {this.state.persons.map((person, idx) => {
+            return <Person 
+              name={person.name} 
+              age={person.age}
+              key={person.id}
+              click={() => this.deletePersonHandler(idx)}
+              changed={this.nameChangedHandler} />
+          })}
+          {/* <UserInput 
+            style={inputStyle}
+            testHandler={this.testHandler} 
+            username={this.state.usernames[0]} />
+          <UserOutput 
+            style={outputStyle}
+            username={this.state.usernames[0]}/>
+          <UserOutput
+            style={outputStyle} 
+            username={this.state.usernames[0]}/> */}
+        </div>
       )
     }
 
