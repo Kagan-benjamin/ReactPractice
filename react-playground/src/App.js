@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
+import UserOutput from './UserOutput/UserOutput.js';
+import UserInput from './UserInput/UserInput.js';
 
 class App extends Component {
   state = {
@@ -8,7 +10,19 @@ class App extends Component {
       { name: 'Ben', age: 30 },
       { name: 'Layla', age: 32 }
     ],
-    full: false
+    full: false,
+    usernames: [
+      'Test 1',
+      'Test 2'
+    ]
+  }
+
+  testHandler = e => {
+    this.setState({
+      usernames: [
+        e.target.value
+      ]
+    })
   }
 
   switchNameHandler = e => {
@@ -44,6 +58,14 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    const inputStyle = {
+      border: '10px solid red',
+    };
+
+    const outputStyle = {
+      border: '10px solid green',
+    };
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
@@ -51,15 +73,25 @@ class App extends Component {
           style={style} 
           onClick={this.switchNameHandler}>Switch Name</button>
         <Person 
-        name={this.state.persons[0].name} 
-        age={this.state.persons[0].age}
-        click={this.switchNameHandler}
-        changed={this.nameChangedHandler}/>
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age}
+          click={this.switchNameHandler}
+          changed={this.nameChangedHandler}/>
         <Person 
-        name={this.state.persons[1].name} 
-        age={this.state.persons[1].age}
-        click={this.switchNameHandler}
-        changed={this.nameChangedHandler}/>
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler}
+          changed={this.nameChangedHandler}/>
+        <UserInput 
+          style={inputStyle}
+          testHandler={this.testHandler} 
+          username={this.state.usernames[0]} />
+        <UserOutput 
+          style={outputStyle}
+          username={this.state.usernames[0]}/>
+        <UserOutput
+          style={outputStyle} 
+          username={this.state.usernames[0]}/>
       </div>
     );
     // return React.createElement('div', {className: 'App'}, 
