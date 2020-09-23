@@ -2,6 +2,8 @@
 
 Notes and code from React - The Complete Guide
 
+react-playground demo app
+
 1. Getting Started
 2. Optional JavaScript Features Review
 3. The Basics of React (Features and Syntax)
