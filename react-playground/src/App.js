@@ -11,6 +11,7 @@ class App extends Component {
       { name: 'Layla', age: 32 }
     ],
     full: false,
+    showpersons: false,
     usernames: [
       'Test 1',
       'Test 2'
@@ -49,6 +50,10 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    this.setState({ showpersons: !this.state.showpersons})
+  }
+
   render() {
     const style = {
       backgroundColor: 'baby blue',
@@ -66,12 +71,10 @@ class App extends Component {
       border: '10px solid green',
     };
 
-    return (
-      <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <button
-          style={style} 
-          onClick={this.switchNameHandler}>Switch Name</button>
+    let persons = null;
+    if(this.state.showpersons){
+      persons = (
+        <div>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age}
@@ -92,6 +95,17 @@ class App extends Component {
         <UserOutput
           style={outputStyle} 
           username={this.state.usernames[0]}/>
+          </div>
+      )
+    }
+
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <button
+          style={style} 
+          onClick={this.togglePersonsHandler}>Switch Name</button>
+        {persons}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, 
