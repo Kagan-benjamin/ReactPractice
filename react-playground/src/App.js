@@ -87,13 +87,24 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'baby blue',
-      font: 'inherit',
-      border: '1px solid white',
-      padding: '8px',
-      cursor: 'pointer'
-    };
+    let style;
+    if(!this.state.showpersons){
+      style = {
+        backgroundColor: 'green',
+        font: 'inherit',
+        border: '1px solid white',
+        padding: '8px',
+        cursor: 'pointer'
+      };
+    } else {
+      style = {
+        backgroundColor: 'red',
+        font: 'inherit',
+        border: '1px solid white',
+        padding: '8px',
+        cursor: 'pointer'
+      };
+    }
 
     // const inputStyle = {
     //   border: '10px solid red',
@@ -129,6 +140,17 @@ class App extends Component {
       )
     }
 
+    let removeCharVar = (
+      <div>
+        {this.state.txt.split('').map((char, idx) => {
+            return <CharComponent 
+              char={char}
+              key={idx} 
+              click={() => this.removeChar(idx)}/>
+          })}
+      </div> 
+    );
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
@@ -143,12 +165,7 @@ class App extends Component {
             value={this.state.txt} />
         <p>Text Count: {this.state.txtcount}</p>
         <ValidationComponent textLength={this.state.txtcount}/>
-          {this.state.txt.split('').map((char, idx) => {
-            return <CharComponent 
-              char={char}
-              key={idx} 
-              click={() => this.removeChar(idx)}/>
-          })}
+        {removeCharVar}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, 
