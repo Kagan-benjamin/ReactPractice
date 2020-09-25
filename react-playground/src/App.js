@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
-import UserOutput from './UserOutput/UserOutput.js';
-import UserInput from './UserInput/UserInput.js';
+import ValidationComponent from './ValidationComponent/ValidationComponent.js';
+import CharComponent from './CharComponent/CharComponent.js';
+// import UserOutput from './UserOutput/UserOutput.js';
+// import UserInput from './UserInput/UserInput.js';
 
 class App extends Component {
   state = {
@@ -15,8 +17,19 @@ class App extends Component {
     usernames: [
       'Test 1',
       'Test 2'
-    ]
+    ],
+    txt: '',
+    txtcount: 0 
   }
+
+  txtChange = e => {
+    this.setState({
+      txt: e.target.value,
+      txtcount: e.target.value.length 
+    })
+  
+  }
+
 
   testHandler = e => {
     this.setState({
@@ -41,12 +54,18 @@ class App extends Component {
     });
   }
 
-  nameChangedHandler = e => {
+  nameChangedHandler = (e, id) => {
+    const personIdx = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+    const person = {
+      ...this.state.persons[personIdx]
+    };
+    person.name = e.target.value;
+    const persons = [...this.state.persons];
+    persons[personIdx] = person;
     this.setState({
-      persons: [
-        { name: e.target.value, age: 100 },
-        { name: e.target.value, age: 100 }
-      ]
+      persons: persons
     })
   }
 
@@ -60,6 +79,13 @@ class App extends Component {
     this.setState({persons: persons})
   }
 
+  removeChar = (idx) => {
+    const chars = this.state.txt.split('');
+    chars.splice(idx, 1);
+    const updatedChars = chars.join('');
+    this.setState({txt: updatedChars});
+  }
+
   render() {
     const style = {
       backgroundColor: 'baby blue',
@@ -69,13 +95,13 @@ class App extends Component {
       cursor: 'pointer'
     };
 
-    const inputStyle = {
-      border: '10px solid red',
-    };
+    // const inputStyle = {
+    //   border: '10px solid red',
+    // };
 
-    const outputStyle = {
-      border: '10px solid green',
-    };
+    // const outputStyle = {
+    //   border: '10px solid green',
+    // };
 
     let persons = null;
     if(this.state.showpersons){
@@ -87,7 +113,7 @@ class App extends Component {
               age={person.age}
               key={person.id}
               click={() => this.deletePersonHandler(idx)}
-              changed={this.nameChangedHandler} />
+              changed={(e) => this.nameChangedHandler(e, person.id)} />
           })}
           {/* <UserInput 
             style={inputStyle}
@@ -110,6 +136,19 @@ class App extends Component {
           style={style} 
           onClick={this.togglePersonsHandler}>Switch Name</button>
         {persons}
+        <br></br><br></br>
+        <input 
+            type="text" 
+            onChange={this.txtChange} 
+            value={this.state.txt} />
+        <p>Text Count: {this.state.txtcount}</p>
+        <ValidationComponent textLength={this.state.txtcount}/>
+          {this.state.txt.split('').map((char, idx) => {
+            return <CharComponent 
+              char={char}
+              key={idx} 
+              click={() => this.removeChar(idx)}/>
+          })}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, 

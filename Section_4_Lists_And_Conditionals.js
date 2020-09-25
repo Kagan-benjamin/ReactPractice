@@ -12,5 +12,9 @@ an anonymous callback:
 
  .ALWAYS UPDATE STATE IN AN IMMUTABLE FASHION (build new state w/ spread)
 
+Useful Resources & Links:
+Conditional Rendering: https://reactjs.org/docs/conditional-rendering.html
+Lists & Keys: https://reactjs.org/docs/lists-and-keys.html
 
+ 
 */
