@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import './App.css';
 import Person from './Person/Person.js';
 import ValidationComponent from './ValidationComponent/ValidationComponent.js';
@@ -94,15 +95,24 @@ class App extends Component {
         font: 'inherit',
         border: '1px solid white',
         padding: '8px',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        ':hover': {
+          backgroundColor: 'lightgreen',
+          color: 'black'
+        }
       };
     } else {
       style = {
-        backgroundColor: 'red',
+        backgroundColor: 'darkred',
+        color: 'white',
         font: 'inherit',
         border: '1px solid white',
         padding: '8px',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        ':hover': {
+          backgroundColor: 'red',
+          color: 'white'
+        }
       };
     }
 
@@ -173,4 +183,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
