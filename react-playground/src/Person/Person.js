@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import './Person.css';
 
 // Functional React Component //
@@ -10,6 +10,12 @@ const person = (props) => {
             width: '450px'
         }
     };
+
+    // const rnd = Math.random();
+    // if(rnd > 0.7){                               Custom Error
+    //     throw new Error('Something went wrong');
+    // }
+
     return (
         <div className="Person" style={style}>
         {/* styled.div`CSS GOES HERE` */}
