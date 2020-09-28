@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person.js';
-import ValidationComponent from './ValidationComponent/ValidationComponent.js';
-import CharComponent from './CharComponent/CharComponent.js';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary.js';
+import Persons from './components/Persons/Persons.js'
+import ValidationComponent from './components/ValidationComponent/ValidationComponent.js';
+import CharComponent from './components/CharComponent/CharComponent.js';
+import Cockpit from './components/Cockpit/Cockpit.js'
+// import ErrorBoundary from './ErrorBoundary/ErrorBoundary.js';
 // import UserOutput from './UserOutput/UserOutput.js';
 // import UserInput from './UserInput/UserInput.js';
 
@@ -88,34 +89,7 @@ class App extends Component {
   }
 
   render() {
-    let style;
-    if(!this.state.showpersons){
-      style = {
-        backgroundColor: 'green',
-        font: 'inherit',
-        border: '1px solid white',
-        padding: '8px',
-        cursor: 'pointer',
-        ':hover': {
-          backgroundColor: 'lightgreen',
-          color: 'black'
-        }
-      };
-    } else {
-      style = {
-        backgroundColor: 'darkred',
-        color: 'white',
-        font: 'inherit',
-        border: '1px solid white',
-        padding: '8px',
-        cursor: 'pointer',
-        ':hover': {
-          backgroundColor: 'red',
-          color: 'white'
-        }
-      };
-    }
-
+    
     // const inputStyle = {
     //   border: '10px solid red',
     // };
@@ -128,15 +102,7 @@ class App extends Component {
     if(this.state.showpersons){
       persons = (
         <div>
-          {this.state.persons.map((person, idx) => {
-            return <ErrorBoundary key={person.id}>
-              <Person 
-              name={person.name} 
-              age={person.age}
-              click={() => this.deletePersonHandler(idx)}
-              changed={(e) => this.nameChangedHandler(e, person.id)} />
-              </ErrorBoundary>
-          })}
+          <Persons persons={this.state.persons}/>
           {/* <UserInput 
             style={inputStyle}
             testHandler={this.testHandler} 
@@ -164,10 +130,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <button
-          style={style} 
-          onClick={this.togglePersonsHandler}>Switch Name</button>
+        <Cockpit showpersons={this.state.showpersons}
+          togglePersonsHandler={this.togglePersonsHandler} />
         {persons}
         <br></br><br></br>
         <input 
