@@ -33,6 +33,12 @@ class App extends Component {
 
   static getDerivedStateFromProps(props, state){}
 
+  componentDidMount(){}
+
+  shouldComponentUpdate(nextProps, nextState){ return true } // performance improvements
+
+  componentDidUpdate(){} // external requests
+
   txtChange = e => {
     this.setState({
       txt: e.target.value,
@@ -111,7 +117,9 @@ class App extends Component {
     if(this.state.showpersons){
       persons = (
         <div>
-          <Persons persons={this.state.persons}/>
+          <Persons persons={this.state.persons}
+          deletePersonHandler={this.deletePersonHandler}
+          nameChangedHandler={this.nameChangedHandler} />
           {/* <UserInput 
             style={inputStyle}
             testHandler={this.testHandler} 
@@ -139,7 +147,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Cockpit showpersons={this.state.showpersons}
+        <Cockpit showpersons={this.state.showpersons} persons={this.state.persons}
           togglePersonsHandler={this.togglePersonsHandler} />
         {persons}
         <br></br><br></br>

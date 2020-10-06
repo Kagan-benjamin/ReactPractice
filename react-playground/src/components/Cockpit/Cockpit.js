@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Radium from 'radium';
 
 const cockpit = props => {
+    useEffect(() => {
+        console.log('oh hi mark')
+        // Http request...
+    }, [props.persons]);
 
     let style;
     if(!props.showpersons){

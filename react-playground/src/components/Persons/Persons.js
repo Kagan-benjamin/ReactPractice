@@ -19,6 +19,8 @@ class Persons extends Component {
 
     }
 
+    componentWillUnmount
+
     render(){
         return (
             <div>
