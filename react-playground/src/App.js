@@ -10,6 +10,12 @@ import Cockpit from './components/Cockpit/Cockpit.js'
 // import UserInput from './UserInput/UserInput.js';
 
 class App extends Component {
+  // constructor(props){
+  //   super(props);
+  //   this.state = {};
+  // }
+
+
   state = {
     persons: [
       { id: 1, name: 'Ben', age: 30 },
@@ -24,6 +30,8 @@ class App extends Component {
     txt: '',
     txtcount: 0 
   }
+
+  static getDerivedStateFromProps(props, state){}
 
   txtChange = e => {
     this.setState({
